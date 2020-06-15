@@ -120,7 +120,7 @@ function updateSigninStatus(isSignedIn) {
 
 // Handle login
 function handleAuthClick() {
-  gapi.auth2.getAuthInstance().signIn();
+  gapi.auth2.getAuthInstance().signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"});
 }
 
 // Handle logout
