@@ -28,10 +28,13 @@
   </nav>
   <br>
   <section>
+    <!-- <iframe width="425" height="344" src="https://www.youtube.com/embed/CZlwNVnVsaw?autoplay=1&livemonitor=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
     <div class="container">
       <p>Log In With Google</p>
       <button class="btn red" id="authorize-button">Log In</button>
       <button class="btn red" id="signout-button">Log Out</button>
+      <button class="btn blue" id="executeBtn">Start Broadcast</button>
       <br>
       <div id="content">
         <div class="row">
@@ -52,7 +55,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
   <script src="main.js"></script>
-  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  <script async defer src="https://apis.google.com/js/api.js" 
+    onload="this.onload=function(){};handleClientLoad()" 
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>
 </body>
 

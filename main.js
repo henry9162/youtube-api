@@ -1,5 +1,6 @@
 // Options
 const CLIENT_ID = '1024587057948-jadgvtn8j20t6au0fol17hnauvc1du0h.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyDJysjy5vwkOBl6ZI5qvalbrjljiCJBx_E'
 const DISCOVERY_DOCS = [
   'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
 ];
@@ -11,6 +12,7 @@ const content = document.getElementById('content');
 const channelForm = document.getElementById('channel-form');
 const channelInput = document.getElementById('channel-input');
 const videoContainer = document.getElementById('video-container');
+const executeBtn = document.getElementById('executeBtn');
 
 const defaultChannel = 'Ekwonwa Henry';
 
@@ -34,7 +36,8 @@ function initClient() {
     .init({
       discoveryDocs: DISCOVERY_DOCS,
       clientId: CLIENT_ID,
-      scope: SCOPES
+      scope: SCOPES,
+      apiKey: API_KEY
     })
     .then(() => {
       // Listen for sign in state changes
@@ -53,13 +56,45 @@ function updateSigninStatus(isSignedIn) {
     signoutButton.style.display = 'block';
     content.style.display = 'block';
     videoContainer.style.display = 'block';
+    executeBtn.style.display = 'block'
     getChannel(defaultChannel);
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
     content.style.display = 'none';
     videoContainer.style.display = 'none';
+    executeBtn.style.display = 'none'
   }
+}
+
+function execute() {
+  let startDate = new Date()
+  let endDate = startDate.setMinutes( startDate.getMinutes() + 30 );
+  return gapi.client.youtube.liveBroadcasts.insert({
+    "resource": {
+      "snippet": {
+        "title": "Test broadcast",
+        "scheduledStartTime": startDate,
+        "scheduledEndTime": endDate
+      },
+      "contentDetails": {
+        "enableClosedCaptions": true,
+        "enableContentEncryption": true,
+        "enableDvr": true,
+        "enableEmbed": true,
+        "recordFromStart": true,
+        "startWithSlate": true
+      },
+      "status": {
+        "privacyStatus": "unlisted"
+      }
+    }
+  })
+    .then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+    },
+    function(err) { console.error("Execute error", err); });
 }
 
 // Handle login
