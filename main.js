@@ -71,6 +71,9 @@ function initClient() {
 
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
+  let startDate = new Date();
+  let endDate = startDate.setMinutes( startDate.getMinutes() + 30 );
+  
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
       "snippet,contentDetails,status"
@@ -78,8 +81,8 @@ function execute() {
     "resource": {
       "snippet": {
         "title": "Test broadcast",
-        "scheduledStartTime": "YOUR_SCHEDULED_START_TIME",
-        "scheduledEndTime": "YOUR_SCHEDULED_END_TIME"
+        "scheduledStartTime": startDate,
+        "scheduledEndTime": endDate
       },
       "contentDetails": {
         "enableClosedCaptions": true,
