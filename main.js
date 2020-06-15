@@ -74,7 +74,7 @@ function execute() {
   let startDate = new Date();
   let endDate = new Date();
   endDate.setMinutes( endDate.getMinutes() + 30 );
-  console(endDate);
+  console.log(endDate);
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
