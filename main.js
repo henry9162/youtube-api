@@ -25,6 +25,40 @@ channelForm.addEventListener('submit', e => {
   getChannel(channel);
 });
 
+// Form submit and change channel
+executeBtn.addEventListener('click', e => {
+  e.preventDefault();
+
+  let startDate = new Date()
+  let endDate = startDate.setMinutes( startDate.getMinutes() + 30 );
+
+  return gapi.client.youtube.liveBroadcasts.insert({
+    "resource": {
+      "snippet": {
+        "title": "Test broadcast",
+        "scheduledStartTime": startDate,
+        "scheduledEndTime": endDate
+      },
+      "contentDetails": {
+        "enableClosedCaptions": true,
+        "enableContentEncryption": true,
+        "enableDvr": true,
+        "enableEmbed": true,
+        "recordFromStart": true,
+        "startWithSlate": true
+      },
+      "status": {
+        "privacyStatus": "unlisted"
+      }
+    }
+  })
+    .then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+    },
+    function(err) { console.error("Execute error", err); });
+});
+
 // Load auth2 library
 function handleClientLoad() {
   gapi.load('client:auth2', initClient);
@@ -68,33 +102,7 @@ function updateSigninStatus(isSignedIn) {
 }
 
 function execute() {
-  let startDate = new Date()
-  let endDate = startDate.setMinutes( startDate.getMinutes() + 30 );
-  return gapi.client.youtube.liveBroadcasts.insert({
-    "resource": {
-      "snippet": {
-        "title": "Test broadcast",
-        "scheduledStartTime": startDate,
-        "scheduledEndTime": endDate
-      },
-      "contentDetails": {
-        "enableClosedCaptions": true,
-        "enableContentEncryption": true,
-        "enableDvr": true,
-        "enableEmbed": true,
-        "recordFromStart": true,
-        "startWithSlate": true
-      },
-      "status": {
-        "privacyStatus": "unlisted"
-      }
-    }
-  })
-    .then(function(response) {
-      // Handle the results here (response.result has the parsed body).
-      console.log("Response", response);
-    },
-    function(err) { console.error("Execute error", err); });
+  
 }
 
 // Handle login
