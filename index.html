@@ -31,12 +31,12 @@
     <!-- <iframe width="425" height="344" src="https://www.youtube.com/embed/CZlwNVnVsaw?autoplay=1&livemonitor=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
     <div class="container">
-      <button onclick="authenticate().then(loadClient)">authorize and load</button>
-      <!-- <button onclick="execute()">execute</button>  
+      <!-- <button onclick="authenticate().then(loadClient)">authorize and load</button> -->
+      <!-- <button onclick="execute()">execute</button>   -->
       <p>Log In With Google</p>
       <button class="btn red" id="authorize-button">Log In</button>
       <button class="btn red" id="signout-button">Log Out</button>
-      <button class="btn blue mt-4" id="executeBtn">Start Broadcast</button>
+      <button class="btn blue mt-4" id="executeBtn" onclick="execute()">Start Broadcast</button>
       <br>
       <div id="content">
         <div class="row">
@@ -52,16 +52,16 @@
         </div>
         <div class="row" id="video-container"></div>
       </div>
-    </div> -->
+    </div>
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="main.js"></script>
-  <!-- <script async defer src="https://apis.google.com/js/api.js" 
+  <script async defer src="https://apis.google.com/js/api.js" 
     onload="this.onload=function(){};handleClientLoad()" 
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
-  </script> -->
+  </script>
 </body>
 
 </html>
