@@ -4,7 +4,7 @@ const API_KEY = 'AIzaSyDJysjy5vwkOBl6ZI5qvalbrjljiCJBx_E'
 const DISCOVERY_DOCS = [
   'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
 ];
-const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
+const SCOPES = 'https://www.googleapis.com/auth/youtube.force-ssl';
 
 const authorizeButton = document.getElementById('authorize-button');
 const signoutButton = document.getElementById('signout-button');
@@ -101,9 +101,6 @@ function updateSigninStatus(isSignedIn) {
   }
 }
 
-function execute() {
-  
-}
 
 // Handle login
 function handleAuthClick() {
