@@ -74,7 +74,6 @@ function execute() {
   let startDate = new Date();
   let endDate = new Date();
   endDate.setMinutes( endDate.getMinutes() + 30 );
-  console.log(endDate);
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
@@ -82,7 +81,7 @@ function execute() {
     ],
     "resource": {
       "snippet": {
-        "title": "Test broadcast",
+        "title": "New test broadcast",
         "scheduledStartTime": startDate,
         "scheduledEndTime": endDate
       },
@@ -101,6 +100,7 @@ function execute() {
   })
     .then(function(response) {
       console.log("Response", response);
+      console.log("Content Details", response.result.contentDetails)
     },
     function(err) { console.error("Execute error", err); });
 }
