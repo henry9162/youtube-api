@@ -55,7 +55,7 @@ function initClient() {
 function execute() {
   let startDate = new Date();
   let endDate = new Date();
-  endDate.setMinutes( endDate.getMinutes() + 30 );
+  endDate.setMinutes( endDate.getMinutes() + 10 );
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
@@ -63,7 +63,7 @@ function execute() {
     ],
     "resource": {
       "snippet": {
-        "title": "New test broadcast",
+        "title": "Newest broadcast",
         "scheduledStartTime": startDate,
         "scheduledEndTime": endDate
       },
