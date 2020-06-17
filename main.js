@@ -55,7 +55,7 @@ function initClient() {
 function execute() {
   let startDate = new Date();
   let endDate = new Date();
-  endDate.setMinutes( endDate.getMinutes() + 10 );
+  endDate.setMinutes( endDate.getMinutes() + 5 );
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
@@ -84,7 +84,8 @@ function execute() {
       console.log("Response", response);
       broadcastId = response.result.id
       createStream()
-      // bindStreamToBroadcast()
+      bindStreamToBroadcast()
+      bindStreamToBroadcast()
     },
     function(err) { console.error("Execute error", err); });
 }
@@ -96,7 +97,7 @@ function createStream(){
     ],
     "resource": {
       "snippet": {
-        "title": "test stream",
+        "title": "Newest stream",
         "description": "test description"
       },
       "cdn": {
@@ -111,11 +112,15 @@ function createStream(){
   })
   .then(function(response) {
     console.log("Stream Response", response);
+    streamId = response.result.id
   },
   function(err) { console.error("Execute error", err); });
 }
 
 function bindStreamToBroadcast(){
+  console.log("broadcastId", broadcastId)
+  console.log("streamId", streamId)
+
   return gapi.client.youtube.liveBroadcasts.bind({
     "id": broadcastId,
     "part": [
