@@ -15,7 +15,9 @@ const videoContainer = document.getElementById('video-container');
 const executeBtn = document.getElementById('executeBtn');
 const defaultChannel = 'CreativeH';
 var broadcastId = '';
-var streamId = '';
+var streamId = ''
+
+
 // Form submit and change channel
 channelForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -110,9 +112,9 @@ function createStream(){
     }
   })
   .then(function(response) {
-    streamId = response.result.id
-    console.log(response.result.id);
     console.log("Stream Response", response);
+    streamId = response.result.id
+    console.log(streamId);
   },
   function(err) { console.error("Execute error", err); });
 }
