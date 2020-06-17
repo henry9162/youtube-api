@@ -14,26 +14,8 @@ const channelInput = document.getElementById('channel-input');
 const videoContainer = document.getElementById('video-container');
 const executeBtn = document.getElementById('executeBtn');
 const defaultChannel = 'CreativeH';
-
-// function authenticate() {
-//   return gapi.auth2.getAuthInstance()
-//       .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
-//       .then(function() { console.log("Sign-in successful"); },
-//             function(err) { console.error("Error signing in", err); });
-// }
-
-// function loadClient() {
-//   gapi.client.setApiKey(API_KEY);
-//   return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-//       .then(function() { console.log("GAPI client loaded for API"); },
-//             function(err) { console.error("Error loading GAPI client for API", err); });
-// }
-
-
-// gapi.load("client:auth2", function() {
-//   gapi.auth2.init({client_id: CLIENT_ID});
-// });
-
+var broadcastId = '';
+var streamId = '';
 // Form submit and change channel
 channelForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -94,13 +76,55 @@ function execute() {
         "startWithSlate": true
       },
       "status": {
-        "privacyStatus": "unlisted"
+        "privacyStatus": "public"
       }
     }
   })
     .then(function(response) {
       console.log("Response", response);
-      console.log("Content Details", response.result.contentDetails)
+      broadcastId = response.result.id
+      createStream()
+      // bindStreamToBroadcast()
+    },
+    function(err) { console.error("Execute error", err); });
+}
+
+function createStream(){
+  return gapi.client.youtube.liveStreams.insert({
+    "part": [
+      "snippet,cdn,contentDetails,status"
+    ],
+    "resource": {
+      "snippet": {
+        "title": "test stream",
+        "description": "test description"
+      },
+      "cdn": {
+        "frameRate": "60fps",
+        "ingestionType": "rtmp",
+        "resolution": "1080p"
+      },
+      "contentDetails": {
+        "isReusable": true
+      }
+    }
+  })
+  .then(function(response) {
+    console.log("Stream Response", response);
+  },
+  function(err) { console.error("Execute error", err); });
+}
+
+function bindStreamToBroadcast(){
+  return gapi.client.youtube.liveBroadcasts.bind({
+    "id": broadcastId,
+    "part": [
+      "id,contentDetails,snippet,status"
+    ],
+    "streamId": streamId
+  })
+    .then(function(response) {
+        console.log("Response", response);
     },
     function(err) { console.error("Execute error", err); });
 }
