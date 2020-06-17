@@ -85,7 +85,6 @@ function execute() {
       broadcastId = response.result.id
       createStream()
       bindStreamToBroadcast()
-      bindStreamToBroadcast()
     },
     function(err) { console.error("Execute error", err); });
 }
@@ -111,8 +110,8 @@ function createStream(){
     }
   })
   .then(function(response) {
-    console.log("Stream Response", response);
     streamId = response.result.id
+    console.log("Stream Response", response);
   },
   function(err) { console.error("Execute error", err); });
 }
