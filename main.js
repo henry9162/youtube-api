@@ -111,6 +111,7 @@ function createStream(){
   })
   .then(function(response) {
     streamId = response.result.id
+    console.log(response.result.id);
     console.log("Stream Response", response);
   },
   function(err) { console.error("Execute error", err); });
