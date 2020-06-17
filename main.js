@@ -130,6 +130,7 @@ function bindStreamToBroadcast(streamId){
   })
     .then(function(response) {
         console.log("Response", response);
+        document.getElementById('embededIframe').innerHTML = response.result.contentDetails.monitorStream.embedHtml
     },
     function(err) { console.error("Execute error", err); });
 }
