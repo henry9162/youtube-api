@@ -15,6 +15,7 @@ const videoContainer = document.getElementById('video-container');
 const executeBtn = document.getElementById('executeBtn');
 const defaultChannel = 'CreativeH';
 var broadcastId = '';
+var status = ''
 
 
 // Form submit and change channel
@@ -56,6 +57,8 @@ function initClient() {
 function execute() {
   let startDate = new Date();
   startDate.setHours(startDate.getHours() + 1)
+  startDate.setMinutes(startDate.getMinutes() + 5)
+
   let endDate = new Date();
   endDate.setHours( endDate.getHours() + 2 );
   
@@ -114,6 +117,7 @@ function createStream(){
   .then(function(response) {
     console.log("Stream Response", response);
     streamId = response.result.id
+    // status = response.result.status.streamStatus
     bindStreamToBroadcast(streamId)
   },
   function(err) { console.error("Create stream error", err); });
@@ -132,7 +136,8 @@ function bindStreamToBroadcast(streamId){
   })
     .then(function(response) {
         console.log("Bind Response", response);
-        updateStream(streamId, broadcastId)
+        // updateStream(streamId, broadcastId)
+        
     },
     function(err) { console.error("Bind error", err); });
 }
