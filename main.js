@@ -56,12 +56,11 @@ function initClient() {
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
   let startDate = new Date();
-  // startDate.setHours(startDate.getHours() + 1)
-  // startDate.setMinutes(startDate.getMinutes() + 5)
+  startDate.setHours(startDate.getHours() + 1)
+  startDate.setMinutes(startDate.getMinutes() + 5)
 
   let endDate = new Date();
-  endDate.setMinutes(endDate.getMinutes() + 5)
-  // endDate.setHours( endDate.getHours() + 2 );
+  endDate.setHours( endDate.getHours() + 2 );
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
@@ -82,7 +81,7 @@ function execute() {
         "startWithSlate": true
       },
       "status": {
-        "privacyStatus": "unlisted"
+        "privacyStatus": "public"
       }
     }
   })
@@ -117,7 +116,6 @@ function createStream(){
   .then(function(response) {
     console.log("Stream Response", response);
     streamId = response.result.id
-    // status = response.result.status.streamStatus
     bindStreamToBroadcast(streamId)
   },
   function(err) { console.error("Create stream error", err); });
