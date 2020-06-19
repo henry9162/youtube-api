@@ -81,7 +81,7 @@ function execute() {
         "startWithSlate": true
       },
       "status": {
-        "privacyStatus": "public"
+        "privacyStatus": "unlisted"
       }
     }
   })
