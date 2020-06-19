@@ -55,8 +55,9 @@ function initClient() {
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
   let startDate = new Date();
+  startDate.setHours(startDate.getHours() + 1)
   let endDate = new Date();
-  endDate.setMinutes( endDate.getMinutes() + 5 );
+  endDate.setHours( endDate.getHours() + 2 );
   
   return gapi.client.youtube.liveBroadcasts.insert({
     "part": [
