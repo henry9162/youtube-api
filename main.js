@@ -139,7 +139,7 @@ function bindStreamToBroadcast(streamId){
 function updateStream(streamId, broadcastId){
   return gapi.client.youtube.liveStreams.update({
     "part": [
-      "snippet"
+      "id,snippet,status"
     ],
     "resource": {
       "id": streamId,
