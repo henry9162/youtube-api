@@ -89,7 +89,6 @@ function execute() {
       console.log("Response", response);
       broadcastId = response.result.id
       createStream()
-      document.getElementById('embededIframe').innerHTML = response.result.contentDetails.monitorStream.embedHtml
     },
     function(err) { console.error("Broadcast error", err); });
 }
@@ -137,7 +136,7 @@ function bindStreamToBroadcast(streamId){
     .then(function(response) {
         console.log("Bind Response", response);
         // updateStream(streamId, broadcastId)
-        
+        document.getElementById('embededIframe').innerHTML = response.result.contentDetails.monitorStream.embedHtml
     },
     function(err) { console.error("Bind error", err); });
 }
