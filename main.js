@@ -96,7 +96,7 @@ function createStream(){
     ],
     "resource": {
       "snippet": {
-        "title": "Newest stream",
+        "title": "Friday's stream",
         "description": "test description"
       },
       "cdn": {
@@ -114,7 +114,7 @@ function createStream(){
     streamId = response.result.id
     bindStreamToBroadcast(streamId)
   },
-  function(err) { console.error("Execute error", err); });
+  function(err) { console.error("Create stream error", err); });
 }
 
 function bindStreamToBroadcast(streamId){
@@ -129,10 +129,49 @@ function bindStreamToBroadcast(streamId){
     "streamId": streamId
   })
     .then(function(response) {
-        console.log("Response", response);
+        console.log("Bind Response", response);
+        updateStream(streamId, broadcastId)
         document.getElementById('embededIframe').innerHTML = response.result.contentDetails.monitorStream.embedHtml
     },
-    function(err) { console.error("Execute error", err); });
+    function(err) { console.error("Bind error", err); });
+}
+
+function updateStream(streamId, broadcastId){
+  return gapi.client.youtube.liveStreams.update({
+    "part": [
+      "snippet"
+    ],
+    "resource": {
+      "id": streamId,
+      "snippet": {
+        "title": "Updated test stream title",
+        "description": "Update description"
+      },
+      "status": {
+        "streamStatus": "active"
+      }
+    }
+  })
+    .then(function(response) {
+      console.log("Updated Stream Response", response);
+      transitionBroadcast(broadcastId)
+    },
+    function(err) { console.error("Update stream  error", err); });
+}
+
+function transitionBroadcast(broadcastId){
+  return gapi.client.youtube.liveBroadcasts.transition({
+    "id": broadcastId,
+    "broadcastStatus": "testing",
+    "part": [
+      "snippet,status"
+    ]
+  })
+    .then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Transition Response", response);
+      },
+      function(err) { console.error("Transition error", err); });
 }
 
 // Update UI sign in state changes
