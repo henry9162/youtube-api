@@ -15,7 +15,6 @@ const videoContainer = document.getElementById('video-container');
 const executeBtn = document.getElementById('executeBtn');
 const defaultChannel = 'CreativeH';
 var broadcastId = '';
-var status = ''
 
 
 // Form submit and change channel
@@ -68,7 +67,7 @@ function execute() {
     ],
     "resource": {
       "snippet": {
-        "title": "Newest broadcast",
+        "title": "Monday broadcast",
         "scheduledStartTime": startDate,
         "scheduledEndTime": endDate
       },
@@ -100,7 +99,7 @@ function createStream(){
     ],
     "resource": {
       "snippet": {
-        "title": "Friday's stream",
+        "title": "Monday's stream",
         "description": "test description"
       },
       "cdn": {
